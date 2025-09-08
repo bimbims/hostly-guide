@@ -9,50 +9,50 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Background & Surface */
-    --background: 0 0% 99%;
-    --foreground: 222 84% 4.9%;
-    --surface: 0 0% 100%;
+    --background: 80 33% 97%;  /* #F8F9F5 - Off-white */
+    --foreground: 188 17% 18%;  /* #233133 - Deep bluish-gray */
+    --surface: 80 33% 97%;
     
     /* Card System */
-    --card: 0 0% 100%;
-    --card-foreground: 222 84% 4.9%;
-    --card-shadow: 0 0% 0%;
+    --card: 80 33% 97%;
+    --card-foreground: 188 17% 18%;
+    --card-shadow: 188 17% 18%;
     
     /* Popover */
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 84% 4.9%;
+    --popover: 80 33% 97%;
+    --popover-foreground: 188 17% 18%;
     
-    /* Brand Colors - Warm Airbnb-inspired */
-    --primary: 12 88% 59%;  /* Warm coral */
-    --primary-foreground: 0 0% 100%;
-    --primary-light: 12 88% 68%;
-    --primary-dark: 12 88% 48%;
+    /* Brand Colors - Nature-inspired */
+    --primary: 93 23% 63%;  /* #A3B18A - Soft sage green */
+    --primary-foreground: 188 17% 18%;
+    --primary-light: 93 23% 73%;
+    --primary-dark: 93 23% 53%;
     
     /* Secondary - Warm accent */
-    --secondary: 25 89% 67%;  /* Warm orange */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 28 28% 55%;  /* #B08968 - Warm taupe */
+    --secondary-foreground: 80 33% 97%;
     
     /* Neutral System */
-    --muted: 220 13% 96%;
-    --muted-foreground: 220 9% 46%;
-    --subtle: 220 13% 91%;
+    --muted: 49 23% 82%;  /* #DAD7CD - Light olive/stone */
+    --muted-foreground: 188 17% 35%;
+    --subtle: 49 23% 87%;
     
     /* Interactive States */
-    --accent: 220 13% 96%;
-    --accent-foreground: 222 84% 4.9%;
+    --accent: 49 23% 82%;  /* Light olive/stone */
+    --accent-foreground: 188 17% 18%;
     
     /* Status Colors */
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
+    --success: 93 23% 53%;  /* Darker sage for success */
+    --success-foreground: 80 33% 97%;
+    --warning: 28 28% 45%;  /* Darker taupe for warning */
+    --warning-foreground: 80 33% 97%;
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 80 33% 97%;
     
     /* UI Elements */
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 12 88% 59%;
+    --border: 49 23% 77%;  /* Light olive border */
+    --input: 49 23% 82%;
+    --ring: 93 23% 63%;  /* Primary sage for focus ring */
     --radius: 0.75rem;
     
     /* Gradients */
