@@ -7,9 +7,13 @@ import {
   CompassIcon as Guide, 
   UtensilsCrossed, 
   LogOut,
+  Heart,
+  Star,
   Wifi,
   MessageCircle
 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const sections = [
   {
@@ -75,24 +79,41 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-subtle">
       {/* Header */}
       <header className="bg-surface shadow-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center">
-            <div className="text-2xl font-bold text-foreground font-['Dancing_Script'] tracking-wide">
-              Ibirahill
-            </div>
+            <h1 className="text-2xl font-bold text-foreground font-['Playfair_Display']">
+              Guest Information Hub
+            </h1>
           </div>
         </div>
       </header>
 
       {/* Quick Info Cards */}
-      <section className="px-4 sm:px-6 lg:px-8 pt-3 pb-3">
+      <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-4">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-3 gap-2 mb-3">
-            <div className="bg-surface border border-border shadow-sm rounded-lg p-2 text-center">
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            <button 
+              onClick={() => {
+                // Create WiFi configuration URL for iOS/Android
+                const ssid = "Casa@2024";
+                const password = "guestpass123"; // This would come from your backend
+                const wifiUrl = `WIFI:T:WPA;S:${ssid};P:${password};;`;
+                
+                // For mobile devices, try to open WiFi settings
+                if (navigator.share) {
+                  navigator.share({ text: `WiFi: ${ssid}\nPassword: ${password}` });
+                } else {
+                  // Fallback: copy to clipboard
+                  navigator.clipboard.writeText(`WiFi: ${ssid}\nPassword: ${password}`);
+                  alert('WiFi info copied to clipboard!');
+                }
+              }}
+              className="bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 rounded-lg p-2 text-center"
+            >
               <Wifi className="w-4 h-4 text-primary mx-auto mb-1" />
-              <p className="text-xs font-medium text-foreground">Ibirahill Guest</p>
-              <p className="text-xs text-muted-foreground">Ibironesia</p>
-            </div>
+              <p className="text-xs font-medium text-foreground">WiFi</p>
+              <p className="text-xs text-muted-foreground">Casa@2024</p>
+            </button>
             
             <div className="bg-surface border border-border shadow-sm rounded-lg p-2 text-center">
               <MapPin className="w-4 h-4 text-primary mx-auto mb-1" />
@@ -110,18 +131,20 @@ const Index = () => {
       </section>
 
       {/* Navigation Sections */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-3">
+      <section className="px-4 sm:px-6 lg:px-8 pb-4">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-3 gap-1">
+          <div className="grid grid-cols-3 gap-3">
             {sections.map((section, index) => {
               const Icon = section.icon;
               return (
                 <Link key={section.id} to={section.route} className="group">
-                  <div className="flex flex-col items-center justify-center p-1 transition-all duration-300 group-hover:scale-105">
-                    <div className="w-16 h-16 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300" 
-                         style={{ backgroundColor: '#A3B18A' }}>
-                      <Icon className="w-8 h-8 text-white" />
+                  <div className="flex flex-col items-center justify-center p-2 transition-all duration-300 group-hover:scale-105">
+                    <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center shadow-md mb-2 group-hover:shadow-lg transition-all duration-300">
+                      <Icon className="w-7 h-7 text-primary-foreground" />
                     </div>
+                    <p className="text-xs text-center text-foreground font-medium leading-tight">
+                      {section.title}
+                    </p>
                   </div>
                 </Link>
               );
@@ -131,7 +154,7 @@ const Index = () => {
       </section>
 
       {/* WhatsApp Contact */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
+      <section className="px-4 sm:px-6 lg:px-8 pb-4">
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => {
@@ -140,11 +163,10 @@ const Index = () => {
               const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
               window.open(whatsappUrl, '_blank');
             }}
-            className="w-full shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-2 flex items-center justify-center space-x-2"
-            style={{ backgroundColor: '#233133' }}
+            className="w-full bg-foreground text-background shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-3 flex items-center justify-center space-x-2"
           >
-            <MessageCircle className="w-3 h-3 text-white" />
-            <span className="text-xs font-medium text-white">Precisa de ajuda?</span>
+            <MessageCircle className="w-4 h-4" />
+            <span className="text-sm font-medium">Precisa de ajuda?</span>
           </button>
         </div>
       </section>
