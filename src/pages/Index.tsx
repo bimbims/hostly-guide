@@ -88,18 +88,10 @@ const Index = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="px-4 sm:px-6 lg:px-8 pt-6 pb-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 font-['Playfair_Display']">
-            Bem-vindos ao seu <br />
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              lar temporário
-            </span>
-          </h1>
-          
-          {/* Quick Info Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      {/* Quick Info Cards */}
+      <section className="px-4 sm:px-6 lg:px-8 pt-4 pb-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-3 gap-2 mb-4">
             <button 
               onClick={() => {
                 // Create WiFi configuration URL for iOS/Android
@@ -116,22 +108,22 @@ const Index = () => {
                   alert('WiFi info copied to clipboard!');
                 }
               }}
-              className="bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 rounded-lg p-3 text-center"
+              className="bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 rounded-lg p-2 text-center"
             >
-              <Wifi className="w-5 h-5 text-primary mx-auto mb-1" />
-              <p className="text-sm font-medium text-foreground">WiFi Gratuito</p>
+              <Wifi className="w-4 h-4 text-primary mx-auto mb-1" />
+              <p className="text-xs font-medium text-foreground">WiFi</p>
               <p className="text-xs text-muted-foreground">Casa@2024</p>
             </button>
             
-            <div className="bg-surface border border-border shadow-sm rounded-lg p-3 text-center">
-              <MapPin className="w-5 h-5 text-primary mx-auto mb-1" />
-              <p className="text-sm font-medium text-foreground">Check-in</p>
-              <p className="text-xs text-muted-foreground">15:00 - 20:00</p>
+            <div className="bg-surface border border-border shadow-sm rounded-lg p-2 text-center">
+              <MapPin className="w-4 h-4 text-primary mx-auto mb-1" />
+              <p className="text-xs font-medium text-foreground">Check-in</p>
+              <p className="text-xs text-muted-foreground">15:00-20:00</p>
             </div>
             
-            <div className="bg-surface border border-border shadow-sm rounded-lg p-3 text-center">
-              <LogOut className="w-5 h-5 text-primary mx-auto mb-1" />
-              <p className="text-sm font-medium text-foreground">Check-out</p>
+            <div className="bg-surface border border-border shadow-sm rounded-lg p-2 text-center">
+              <LogOut className="w-4 h-4 text-primary mx-auto mb-1" />
+              <p className="text-xs font-medium text-foreground">Check-out</p>
               <p className="text-xs text-muted-foreground">Até 11:00</p>
             </div>
           </div>
@@ -139,18 +131,18 @@ const Index = () => {
       </section>
 
       {/* Navigation Sections */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-8">
+      <section className="px-4 sm:px-6 lg:px-8 pb-4">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-3 gap-3">
             {sections.map((section, index) => {
               const Icon = section.icon;
               return (
                 <Link key={section.id} to={section.route} className="group">
-                  <div className="flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:scale-105">
-                    <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-lg mb-4 group-hover:shadow-xl transition-all duration-300">
-                      <Icon className="w-10 h-10 text-primary-foreground" />
+                  <div className="flex flex-col items-center justify-center p-2 transition-all duration-300 group-hover:scale-105">
+                    <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center shadow-md mb-2 group-hover:shadow-lg transition-all duration-300">
+                      <Icon className="w-7 h-7 text-primary-foreground" />
                     </div>
-                    <p className="text-sm text-center text-foreground font-medium leading-tight">
+                    <p className="text-xs text-center text-foreground font-medium leading-tight">
                       {section.title}
                     </p>
                   </div>
@@ -162,7 +154,7 @@ const Index = () => {
       </section>
 
       {/* WhatsApp Contact */}
-      <section className="px-4 sm:px-6 lg:px-8 pb-8">
+      <section className="px-4 sm:px-6 lg:px-8 pb-4">
         <div className="max-w-4xl mx-auto">
           <button
             onClick={() => {
@@ -171,9 +163,9 @@ const Index = () => {
               const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
               window.open(whatsappUrl, '_blank');
             }}
-            className="w-full bg-foreground text-background shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-4 flex items-center justify-center space-x-3"
+            className="w-full bg-foreground text-background shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-3 flex items-center justify-center space-x-2"
           >
-            <MessageCircle className="w-5 h-5" />
+            <MessageCircle className="w-4 h-4" />
             <span className="text-sm font-medium">Precisa de ajuda?</span>
           </button>
         </div>
