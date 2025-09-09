@@ -9,7 +9,8 @@ import {
   LogOut,
   Heart,
   Star,
-  Wifi
+  Wifi,
+  MessageCircle
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -78,20 +79,11 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-subtle">
       {/* Header */}
       <header className="bg-surface shadow-sm sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <Heart className="w-4 h-4 text-white" />
-              </div>
-              <h1 className="text-xl font-semibold text-foreground font-['Playfair_Display']">
-                Bem-vindos
-              </h1>
-            </div>
-            <div className="flex items-center space-x-1 text-sm text-muted-foreground">
-              <Star className="w-4 h-4 text-primary" />
-              <span>5.0</span>
-            </div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-foreground font-['Playfair_Display']">
+              Guest Information Hub
+            </h1>
           </div>
         </div>
       </header>
@@ -108,29 +100,40 @@ const Index = () => {
           
           {/* Quick Info Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            <Card className="bg-surface border-border shadow-sm hover:shadow-md transition-all duration-300">
-              <CardContent className="p-3 text-center">
-                <Wifi className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-sm font-medium text-foreground">WiFi Gratuito</p>
-                <p className="text-xs text-muted-foreground">Casa@2024</p>
-              </CardContent>
-            </Card>
+            <button 
+              onClick={() => {
+                // Create WiFi configuration URL for iOS/Android
+                const ssid = "Casa@2024";
+                const password = "guestpass123"; // This would come from your backend
+                const wifiUrl = `WIFI:T:WPA;S:${ssid};P:${password};;`;
+                
+                // For mobile devices, try to open WiFi settings
+                if (navigator.share) {
+                  navigator.share({ text: `WiFi: ${ssid}\nPassword: ${password}` });
+                } else {
+                  // Fallback: copy to clipboard
+                  navigator.clipboard.writeText(`WiFi: ${ssid}\nPassword: ${password}`);
+                  alert('WiFi info copied to clipboard!');
+                }
+              }}
+              className="bg-surface border border-border shadow-sm hover:shadow-md transition-all duration-300 rounded-lg p-3 text-center"
+            >
+              <Wifi className="w-5 h-5 text-primary mx-auto mb-1" />
+              <p className="text-sm font-medium text-foreground">WiFi Gratuito</p>
+              <p className="text-xs text-muted-foreground">Casa@2024</p>
+            </button>
             
-            <Card className="bg-surface border-border shadow-sm hover:shadow-md transition-all duration-300">
-              <CardContent className="p-3 text-center">
-                <MapPin className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-sm font-medium text-foreground">Check-in</p>
-                <p className="text-xs text-muted-foreground">15:00 - 20:00</p>
-              </CardContent>
-            </Card>
+            <div className="bg-surface border border-border shadow-sm rounded-lg p-3 text-center">
+              <MapPin className="w-5 h-5 text-primary mx-auto mb-1" />
+              <p className="text-sm font-medium text-foreground">Check-in</p>
+              <p className="text-xs text-muted-foreground">15:00 - 20:00</p>
+            </div>
             
-            <Card className="bg-surface border-border shadow-sm hover:shadow-md transition-all duration-300">
-              <CardContent className="p-3 text-center">
-                <LogOut className="w-5 h-5 text-primary mx-auto mb-1" />
-                <p className="text-sm font-medium text-foreground">Check-out</p>
-                <p className="text-xs text-muted-foreground">Até 11:00</p>
-              </CardContent>
-            </Card>
+            <div className="bg-surface border border-border shadow-sm rounded-lg p-3 text-center">
+              <LogOut className="w-5 h-5 text-primary mx-auto mb-1" />
+              <p className="text-sm font-medium text-foreground">Check-out</p>
+              <p className="text-xs text-muted-foreground">Até 11:00</p>
+            </div>
           </div>
         </div>
       </section>
@@ -138,21 +141,19 @@ const Index = () => {
       {/* Navigation Sections */}
       <section className="px-4 sm:px-6 lg:px-8 pb-8">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
             {sections.map((section, index) => {
               const Icon = section.icon;
               return (
                 <Link key={section.id} to={section.route} className="group">
-                  <Card className="bg-surface border-border shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden aspect-square">
-                    <CardContent className="p-0 h-full flex flex-col items-center justify-center">
-                      <div className={`w-12 h-12 bg-gradient-to-r ${section.color} rounded-xl flex items-center justify-center shadow-md mb-3`}>
-                        <Icon className="w-6 h-6 text-primary-foreground" />
-                      </div>
-                      <p className="text-xs text-center text-foreground font-medium px-2 leading-tight">
-                        {section.title}
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <div className="flex flex-col items-center justify-center p-4 transition-all duration-300 group-hover:scale-105">
+                    <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center shadow-lg mb-4 group-hover:shadow-xl transition-all duration-300">
+                      <Icon className="w-10 h-10 text-primary-foreground" />
+                    </div>
+                    <p className="text-sm text-center text-foreground font-medium leading-tight">
+                      {section.title}
+                    </p>
+                  </div>
                 </Link>
               );
             })}
@@ -160,20 +161,21 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Emergency Contact */}
+      {/* WhatsApp Contact */}
       <section className="px-4 sm:px-6 lg:px-8 pb-8">
         <div className="max-w-4xl mx-auto">
-          <Card className="bg-gradient-primary text-primary-foreground shadow-lg">
-            <CardContent className="p-6 text-center">
-              <h3 className="text-lg font-semibold mb-2">Precisa de ajuda?</h3>
-              <p className="text-primary-foreground/80 mb-4">
-                Estamos aqui para tornar sua estadia inesquecível
-              </p>
-              <Button variant="secondary" size="sm" className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-                Entre em contato
-              </Button>
-            </CardContent>
-          </Card>
+          <button
+            onClick={() => {
+              const phoneNumber = "+351912345678"; // Replace with actual number
+              const message = "Olá! Preciso de ajuda com a minha estadia.";
+              const whatsappUrl = `https://wa.me/${phoneNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+              window.open(whatsappUrl, '_blank');
+            }}
+            className="w-full bg-foreground text-background shadow-md hover:shadow-lg transition-all duration-300 rounded-lg p-4 flex items-center justify-center space-x-3"
+          >
+            <MessageCircle className="w-5 h-5" />
+            <span className="text-sm font-medium">Precisa de ajuda?</span>
+          </button>
         </div>
       </section>
     </div>
